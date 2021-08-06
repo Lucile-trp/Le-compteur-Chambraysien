@@ -1,25 +1,61 @@
-import logo from './logo.svg';
 import './App.css';
+import './user/styles/style.css';
+
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import {
+    BrowserRouter as Router,
+    Route,
+  } from "react-router-dom";
+
+
+import Header from './user/composants/Header.js';
+import Footer from './user/composants/Footer.js';
+import Home from './user/pages/Home.jsx';
+import Compteur from './user/pages/Compteur.jsx';
+import AdminPage from './admin/pages/Admin';
+import Nav from './user/composants/Nav';
+
+import { db } from './firebase';
+
+
+
 
 function App() {
+
+  const [currentvisitor, setCurrent] = useState();
+  db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").onSnapshot((doc) => {
+    setCurrent(doc.data().current);
+  });
+
+  const [user, setUser] = useState(false);
+
+
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+          <Router>
+              <Route exact path="/">
+                  <Header />
+                 
+                  <Home user={user} setUser={setUser}/>
+                  <Footer />
+              </Route>
+
+              <Route exact path="/compteur">
+                <Header />
+                
+                <Compteur current={currentvisitor} user={user}/>
+              </Route>
+
+              <Route exact path="/admin">
+                <Header />
+                <AdminPage current={currentvisitor} db={db} setCurrent={setCurrent}/>
+                <Footer />
+              </Route>
+              
+          </Router>
+  )
+
 }
 
 export default App;

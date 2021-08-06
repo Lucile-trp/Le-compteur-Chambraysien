@@ -1,0 +1,42 @@
+.section-compteur{
+    width: 40%;
+    margin:auto;
+}
+.compteur-current-number{
+    text-align: center;
+    font-size: 5em;
+    font-weight: bold;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.compteur-button {
+    height: 100px;
+    width : 90%;
+    background-color: rgb(47, 49, 49);
+    margin: auto;
+    margin-top: 45px;
+    box-shadow: 0px 0px 15px gray;
+    border-radius: 10px;
+    display: flex;
+}
+
+.compteur-button-text {
+    font-size: 3.5em;
+    color:white;
+    margin: auto;
+    text-align: center;
+
+}
+
+.compteur-button:active{
+    box-shadow: inset 0px 0px 25px gray;
+}
+
+@media screen and (max-width:1000px){
+    .section-compteur{
+        width: 90%;
+    }
+    
+}

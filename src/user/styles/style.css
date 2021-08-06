@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+* {
+    font-family: 'Playfair Display', Arial;
+    font-weight: 100;
+    margin: 0;
+}
