@@ -3,6 +3,11 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
+.separator{
+    border:0.05em solid rgb(29, 29, 29);
+    width:300px;
+}
+
 .dashboard-section-2{
     padding: 20px 30px;
     display: flex;
@@ -29,6 +34,10 @@ button{
     .dashboard-section-2{
         padding: 0;
         
+    }
+    .separator{
+        border:0.05em solid rgb(29, 29, 29);
+        width:150px;
     }
 
     

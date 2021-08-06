@@ -7,32 +7,54 @@ import {
     Link,
   } from "react-router-dom";
 
+// Firebase App (the core Firebase SDK) is always required and must be listed first
+import firebase from 'firebase/app';
 
-function Compteur({current, user}){
+// Add the Firebase products that you want to use
+import 'firebase/firestore';
+
+
+
+function Compteur({current, user, totalVisitor}){
+
+
+
+    let currentdate = Date.now();
+    
+
     
     // FUNCTIONS
     function add(){
         db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").set({
-            current: current +1
+            current: current +1,
         });
-        db.collection("historique").doc("relorelo").set({ 
-            number : current + 1
+
+        db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").update({ total: totalVisitor + 1 });
+
+        db.collection("historique").doc().set({ 
+            date : currentdate,
+            number : current +1
         });
     }
 
     function under(){
-        db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").set({
+        db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").update({
             current: current -1
         })
+        db.collection("historique").doc().set({ 
+            date : currentdate,
+            number : current - 1
+        });
     }
 
     // EFFECTS
     useEffect(()=>{
-        document.title = 'LCC - Compteur'
+        document.title = 'LCC - Compteur';
+
     }, [])
 
     // RETURN
-    if (user == true){
+    if (user === true){
         return (
             <div className="section-compteur">
                 <h2 className="compteur-current-number">{current}</h2>

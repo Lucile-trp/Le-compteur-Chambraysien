@@ -28,6 +28,11 @@ function App() {
     setCurrent(doc.data().current);
   });
 
+  const [totalVisitor, setTotalVisitor] = useState();
+  db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").onSnapshot((doc) => {
+    setTotalVisitor(doc.data().total);
+  });
+
   const [user, setUser] = useState(false);
 
 
@@ -44,12 +49,12 @@ function App() {
               <Route exact path="/compteur">
                 <Header />
                 
-                <Compteur current={currentvisitor} user={user}/>
+                <Compteur current={currentvisitor} user={user} totalVisitor={totalVisitor} />
               </Route>
 
               <Route exact path="/admin">
                 <Header />
-                <AdminPage current={currentvisitor} db={db} setCurrent={setCurrent}/>
+                <AdminPage current={currentvisitor} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
                 <Footer />
               </Route>
               

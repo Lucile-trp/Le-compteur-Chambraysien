@@ -14,7 +14,7 @@ function Home({user, setUser}){
   
     function verify(){
         db.collection("password").doc("GsJ7CqWKLXATv6S1dINp").get().then((doc) => {
-            if (tempMDP == doc.data().password){
+            if (tempMDP === doc.data().password){
                 setUser(true)
               } else {
                 setUser(false);

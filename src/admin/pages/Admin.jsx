@@ -10,7 +10,7 @@ import Dashboard from '../composants/Dashboard.js';
 import SmallNav from '../composants/SmallNav.js'
 
 
-function AdminPage({current, db, setCurrent}){
+function AdminPage({current, db, setCurrent, totalVisitor}){
 
     const [Nav, setNav] = useState('Statistiques');
 
@@ -39,12 +39,8 @@ function AdminPage({current, db, setCurrent}){
                 <SmallNav  setNav={setNav}/>
             </div>
 
-           
-
-           
-
             <section className="main-dashboard-section">
-                <Dashboard Nav={Nav} current={current} db={db} setCurrent={setCurrent} />
+                <Dashboard Nav={Nav} current={current} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
             </section>
         </div>
     )

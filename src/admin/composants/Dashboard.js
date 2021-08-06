@@ -3,7 +3,7 @@ import LargeCard from './LargeCard';
 import '../styles/Dashboard.css'
 import { useEffect, useState } from 'react';
 
-function Dashboard({Nav, current, db}){
+function Dashboard({Nav, current, db, totalVisitor}){
     //VARIABLE
     const [currentPassword, setPassword] = useState();
     const [tempPassword, setTempPassword] = useState();
@@ -27,17 +27,19 @@ function Dashboard({Nav, current, db}){
 
     }
 
+
     if (Nav == 'Statistiques'){
         return (
             <div className="dashboard-section-2">
                 <h2 className="dashboard-title">{Nav}</h2>
+                <div className="separator"></div>
                 <div className="card-section">
                     <LittleCard title='Visiteurs Actuels' content={current}/>
-                    <LittleCard title='Visiteurs Totaux' content='NaN'/>
+                    <LittleCard title='Visiteurs Totaux' content={totalVisitor}/>
                     <LittleCard title='Code compteur' content={currentPassword}/>
                 </div>
                 <div className="card-section">
-                    <LargeCard title="Courbe"/>
+                    <LargeCard title="Courbe" db={db}/>
                 </div>
             </div>
         )
@@ -46,13 +48,14 @@ function Dashboard({Nav, current, db}){
         return(
             <div className="dashboard-section-2">
                 <h2 className="dashboard-title">{Nav}</h2>
+                <div className="separator"></div>
                 <div>
                 <input type="number" onChange={(e) => setTempPassword(e.target.value)}></input>
                 <button className="button-action" onClick={() => changePasswordCompteur(tempPassword)}>Changer le code du compteur</button>
                 </div>
                 <button onClick={changeCurrentNumber}>Remettre le compteur à zéro</button>
                 <button>Exporter les statistiques en PDF</button>
-                <button>Supprimer les données de visites</button>
+                <p>La suppression des données de visite doit être fait manuelle dans Firebase.</p>
             </div>
         )
 
