@@ -34,21 +34,17 @@ function App() {
   });
 
   const [user, setUser] = useState(false);
-
-
     
   return (
           <Router>
               <Route exact path="/">
                   <Header />
-                 
                   <Home user={user} setUser={setUser}/>
                   <Footer />
               </Route>
 
               <Route exact path="/compteur">
                 <Header />
-                
                 <Compteur current={currentvisitor} user={user} totalVisitor={totalVisitor} />
               </Route>
 

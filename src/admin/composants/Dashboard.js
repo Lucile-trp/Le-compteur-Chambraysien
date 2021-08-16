@@ -1,7 +1,8 @@
 import LittleCard from '../composants/LittleCards';
 import LargeCard from './LargeCard';
+
 import '../styles/Dashboard.css'
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 
 function Dashboard({Nav, current, db, totalVisitor}){
     //VARIABLE
@@ -13,14 +14,14 @@ function Dashboard({Nav, current, db, totalVisitor}){
     });
 
     function changeCurrentNumber(){
-        db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").set({
+        db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").update({
             current: 0
           });
           alert('Le compteur a bien été réinitialisé.')
     }
 
     function changePasswordCompteur(data){
-        db.collection("password").doc("GsJ7CqWKLXATv6S1dINp").set({
+        db.collection("password").doc("GsJ7CqWKLXATv6S1dINp").update({
             password: data
           });
           alert('Le code Compteur a bien été changé par : ' + data)

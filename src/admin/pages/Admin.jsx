@@ -7,7 +7,9 @@ import {
   } from "react-router-dom";
 
 import Dashboard from '../composants/Dashboard.js';
-import SmallNav from '../composants/SmallNav.js'
+import SmallNav from '../composants/SmallNav.js';
+
+
 
 
 function AdminPage({current, db, setCurrent, totalVisitor}){

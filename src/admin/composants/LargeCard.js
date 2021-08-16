@@ -1,43 +1,28 @@
 import { useEffect, useState } from 'react';
+import '../styles/LargeCard.css'
+import Canvas from '../composants/Canvas'
 
 function LargeCard({title, db}){
-
-    var collectionHistory = db.collection("historique");
-    var options = {
-        year: 'numeric', month: 'numeric', day: 'numeric',
-        hour: 'numeric', minute: 'numeric', second: 'numeric',
-        hour12: false,
-      };
-
-    function getHistorique(){
-        db.collection("historique").get().then((querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(" => ", doc.data());
-            });
-        });
-    }
-
-    //RECUPERATION D4UNE DONNEE
-
-    const [oneDate, setDate] = useState('');
-    const [oneNumberV, setNumberV] = useState('');
+    const [docs, setDocs] = useState([]);
 
     useEffect( () => {
-        db.collection("historique").doc("avPeRfOaSYueieVFIolP").get().then((doc) => {
-            const data = doc.data().date;
-            const dataValue = new Intl.DateTimeFormat('default', options).format(data);
-            setDate(dataValue);
-            const datanumber = doc.data().number;
-            setNumberV(datanumber);
-        })
-    },[]);
+        db.collection("historique").orderBy('date').get().then((querySnapshot) => {
+            let tmp = [];
+            querySnapshot.forEach((doc) => {
+                const docData = doc.data();
+                tmp.push(docData)
+            });
+            setDocs(tmp);
+        });
+        
+        
+    }, [])
 
 
     return(
-        <div>
-            <h2 onClick={() => getHistorique()}>{title}</h2>
-            <p> Visiteurs : {oneNumberV} / Le :{oneDate} </p>
+        <div className="large-card">
+            <h2>{title}</h2>
+            <Canvas valuesHistorique={docs.map(e => e.number)} dateHistorique={docs.map(e => new Date(e.date).toISOString())}/>
         </div>
     )
 
