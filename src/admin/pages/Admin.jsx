@@ -1,10 +1,7 @@
 import '../styles/Admin.css'
 
 import { useState, useEffect } from 'react'
-import {
-    BrowserRouter as Router,
-    Link
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Dashboard from '../composants/Dashboard.js';
 import SmallNav from '../composants/SmallNav.js';

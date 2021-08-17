@@ -7,10 +7,7 @@ import "../styles/Home.css";
 import {useState, useEffect} from 'react';
 import { db } from '../../firebase';
 
-import {
-    BrowserRouter as Router,
-    Link,
-  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -42,13 +39,7 @@ function Home({user, setUser}){
              
            console.log(token)
            console.log(user)
-        }).catch(function(error) {
-           var errorCode = error.code;
-           var errorMessage = error.message;
-             
-           console.log(error.code)
-           console.log(error.message)
-        });
+        })
      }
 
      

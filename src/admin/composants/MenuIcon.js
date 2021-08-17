@@ -2,7 +2,7 @@ import '../styles/MenuIcon.css';
 
 function MenuIcon({isOpen, setIsOpen}){
 
-    if (isOpen == true ){
+    if (isOpen === true ){
         return (
             <div className="small-navbar-open" onClick={() => setIsOpen(false)}>
                 <div className="bar1 change"></div>
@@ -10,7 +10,7 @@ function MenuIcon({isOpen, setIsOpen}){
                 <div className="bar3 change"></div>
             </div>
         )
-    } else if (isOpen == false) {
+    } else if (isOpen === false) {
         return (
             <div className="small-navbar-close" onClick={() => setIsOpen(true)}>
                 <div className="bar1"></div>

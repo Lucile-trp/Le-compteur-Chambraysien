@@ -1,5 +1,7 @@
 import { Line } from 'react-chartjsx'
-import React, {useEffect } from 'react';
+import React, {useEffect} from 'react';
+
+import '../styles/Canvas.css'
 
 
 
@@ -16,11 +18,10 @@ function Canvas({valuesHistorique, dateHistorique}){
           datasets: [{ 
               data: valuesHistorique,
               label: "Visites",
-              borderColor: "#3cba9f",
+              borderColor: "#da4c80",
               fill : false,
             }
           ]
-
         }
       }
 
@@ -28,8 +29,8 @@ function Canvas({valuesHistorique, dateHistorique}){
         <div>
         <Line data={state.lineChartData} 
             options={chartOptions} 
-            width={800} 
-            height={275} />
+            width={1200} 
+            height={400} />
         </div>
     )
 }

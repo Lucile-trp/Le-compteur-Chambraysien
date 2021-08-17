@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import format from 'date-fns/format'
+
 import '../styles/LargeCard.css'
 import Canvas from '../composants/Canvas'
 
@@ -14,15 +16,13 @@ function LargeCard({title, db}){
             });
             setDocs(tmp);
         });
-        
-        
     }, [])
 
 
     return(
         <div className="large-card">
             <h2>{title}</h2>
-            <Canvas valuesHistorique={docs.map(e => e.number)} dateHistorique={docs.map(e => new Date(e.date).toISOString())}/>
+            <Canvas valuesHistorique={docs.map(e => e.number)} dateHistorique={docs.map(e => format(new Date(e.date), 'dd/MM/yyyy'))}/>
         </div>
     )
 

@@ -1,8 +1,9 @@
 .large-card{
-    grid-column: 1fr;
+    grid-column: 1/4;
     background-color: white;
     margin:10px 10px;
     padding: 10px 10px;
     border-radius: 7px;
     box-shadow: 0px 0px 4px rgba(160, 157, 157, 0.35);
 }
+

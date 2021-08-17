@@ -1,27 +1,13 @@
-import { useState, useEffect } from 'react'
-import '../styles/Compteur.css'
-import { db } from '../../firebase';
-import { doc, setDoc } from "firebase/firestore"; 
-import {
-    BrowserRouter as Router,
-    Link,
-  } from "react-router-dom";
-
-// Firebase App (the core Firebase SDK) is always required and must be listed first
-import firebase from 'firebase/app';
-
-// Add the Firebase products that you want to use
+import { useEffect } from 'react'
+import { Link } from "react-router-dom";
 import 'firebase/firestore';
+import { db } from '../../firebase';
 
+import '../styles/Compteur.css'
 
 
 function Compteur({current, user, totalVisitor}){
-
-
-
     let currentdate = Date.now();
-    
-
     
     // FUNCTIONS
     function add(){

@@ -14,7 +14,7 @@ import Footer from './user/composants/Footer.js';
 import Home from './user/pages/Home.jsx';
 import Compteur from './user/pages/Compteur.jsx';
 import AdminPage from './admin/pages/Admin';
-import Nav from './user/composants/Nav';
+
 
 import { db } from './firebase';
 
@@ -24,6 +24,7 @@ import { db } from './firebase';
 function App() {
 
   const [currentvisitor, setCurrent] = useState();
+
   db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").onSnapshot((doc) => {
     setCurrent(doc.data().current);
   });
