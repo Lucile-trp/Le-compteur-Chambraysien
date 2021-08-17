@@ -7,7 +7,7 @@ import "../styles/Home.css";
 import {useState, useEffect} from 'react';
 import { db } from '../../firebase';
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 
 
@@ -30,15 +30,18 @@ function Home({user, setUser}){
 
     // AUTH WITH GOOGLE
     const provider = new firebase.auth.GoogleAuthProvider();
+    let history = useHistory();
 
     function googleSignin() {
+        
         firebase.auth()
         .signInWithPopup(provider).then(function(result) {
-           var token = result.credential.accessToken;
-           var user = result.user;
-             
-           console.log(token)
-           console.log(user)
+            var credential = result.credential;
+            var token = credential.accessToken;
+            var user = result.user;
+
+           console.log(token, user)
+           history.push("/admin");
         })
      }
 
@@ -56,7 +59,7 @@ function Home({user, setUser}){
             <div className="home-section-admin">
                 <Link className="link-admin home-link" to='/Admin'>Accès admin</Link>
             </div>
-            <button onClick ={() => googleSignin()}>Google Signin</button>
+            <button onClick ={() => googleSignin()}>Connexion Administrateur/Dev</button>
             <div className="separator"></div>
         </div> 
 

@@ -1,7 +1,11 @@
 import '../styles/Admin.css'
 
+import firebase from 'firebase/app';
+import 'firebase/auth'
+import 'firebase/firestore';
+
 import { useState, useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import Dashboard from '../composants/Dashboard.js';
 import SmallNav from '../composants/SmallNav.js';
@@ -10,13 +14,28 @@ import SmallNav from '../composants/SmallNav.js';
 
 
 function AdminPage({currentdata, db, setCurrent, totalVisitor}){
-
+    //VARIABLES
     const [Nav, setNav] = useState('Statistiques');
+    let history = useHistory();
 
-    useEffect( () =>{
-        document.title= 'LCC Admin - ' + Nav ;
+    // PAGE TITLE
+    useEffect( () =>{document.title= 'LCC Admin - ' + Nav ; },[Nav])
 
-    },[Nav]) 
+
+
+    //FUCNTIONS
+    ///disconnect TODO
+
+    function logOut() {
+        
+        firebase.auth().signOut().then(() => {
+            console.log("Vous avez bien été déconnecté")
+            history.push("/");
+          }).catch((error) => {
+            console.log(error)
+          });
+    }
+    
 
 
     return(
@@ -31,7 +50,12 @@ function AdminPage({currentdata, db, setCurrent, totalVisitor}){
                 </section>
                 <section className="nav-section">
                     <h3 className="nav-title">Hébergement et Base de données</h3>
-                    <a href="https://firebase.google.com/" className="nav-link" target="_blank">Firebase</a>
+                    <a href="https://firebase.google.com/" className="nav-link" rel="noreferrer" target="_blank">Firebase</a>
+                </section>
+
+                <section className="nav-section">
+                    <h3 className="nav-title">_</h3>
+                    <button className="nav-link button-disconnect" onClick={ () => logOut()}>Se déconnecter</button>
                 </section>
             </div>
             <div className="small-screen-nav"> 
