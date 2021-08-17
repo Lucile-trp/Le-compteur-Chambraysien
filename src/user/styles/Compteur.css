@@ -2,14 +2,26 @@
     width: 40%;
     margin:auto;
 }
+
 .compteur-current-number{
     text-align: center;
     font-size: 5em;
     font-weight: bold;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    margin-top: 70px;
+    margin-bottom: 50px;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.compteur-current-number-update-at{
+    text-align: center;
+    font-size: 1em;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style:italic;
+    color: rgba(160, 157, 157, 1);
+}
+
 
 .compteur-button {
     height: 100px;
@@ -36,7 +48,7 @@
 
 @media screen and (max-width:1000px){
     .section-compteur{
-        width: 90%;
+        width: 98%;
     }
     
 }

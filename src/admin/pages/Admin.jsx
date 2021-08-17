@@ -9,7 +9,7 @@ import SmallNav from '../composants/SmallNav.js';
 
 
 
-function AdminPage({current, db, setCurrent, totalVisitor}){
+function AdminPage({currentdata, db, setCurrent, totalVisitor}){
 
     const [Nav, setNav] = useState('Statistiques');
 
@@ -39,7 +39,7 @@ function AdminPage({current, db, setCurrent, totalVisitor}){
             </div>
 
             <section className="main-dashboard-section">
-                <Dashboard Nav={Nav} current={current} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
+                <Dashboard Nav={Nav} currentdata={currentdata} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
             </section>
         </div>
     )

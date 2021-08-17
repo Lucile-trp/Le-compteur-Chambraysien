@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import {
     BrowserRouter as Router,
     Route,
+    Switch
   } from "react-router-dom";
 
 
@@ -14,6 +15,7 @@ import Footer from './user/composants/Footer.js';
 import Home from './user/pages/Home.jsx';
 import Compteur from './user/pages/Compteur.jsx';
 import AdminPage from './admin/pages/Admin';
+import NotFound from './user/composants/NotFound';
 
 
 import { db } from './firebase';
@@ -23,38 +25,46 @@ import { db } from './firebase';
 
 function App() {
 
-  const [currentvisitor, setCurrent] = useState();
+  const [currentvisitor, setCurrent] = useState([]);
+  const [totalVisitor, setTotalVisitor] = useState([]);
 
-  db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").onSnapshot((doc) => {
-    setCurrent(doc.data().current);
-  });
+  useEffect( () => {
+    db.collection("visitor").doc("current").onSnapshot((doc) => {
+      setCurrent(doc.data());
+    });
+    db.collection("visitor").doc("total").onSnapshot((doc) => {
+      setTotalVisitor(doc.data());
+    });
+  },[])
 
-  const [totalVisitor, setTotalVisitor] = useState();
-  db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").onSnapshot((doc) => {
-    setTotalVisitor(doc.data().total);
-  });
+  
+  
 
   const [user, setUser] = useState(false);
     
   return (
           <Router>
+            <Header />
+            <Switch>
+           
               <Route exact path="/">
-                  <Header />
                   <Home user={user} setUser={setUser}/>
-                  <Footer />
               </Route>
 
               <Route exact path="/compteur">
-                <Header />
                 <Compteur current={currentvisitor} user={user} totalVisitor={totalVisitor} />
               </Route>
 
               <Route exact path="/admin">
-                <Header />
-                <AdminPage current={currentvisitor} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
-                <Footer />
+                <AdminPage currentdata={currentvisitor} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
               </Route>
-              
+
+              <Route path="*">
+                <NotFound />
+              </Route>
+
+            </Switch>
+            <Footer /> 
           </Router>
   )
 

@@ -11,7 +11,7 @@ import '../styles/Dashboard.css';
 import {  useState } from 'react';
 import { format } from 'date-fns';
 
-function Dashboard({Nav, current, db, totalVisitor}){
+function Dashboard({Nav, currentdata, db, totalVisitor}){
     //VARIABLE
     const [currentPassword, setPassword] = useState();
     const [passwordUpdate, setPasswordUpdate] = useState();
@@ -24,29 +24,29 @@ function Dashboard({Nav, current, db, totalVisitor}){
         });
     }, [])
     
-    
-
+    // FUNCTIONS
+    //reset current number
     function changeCurrentNumber(){
-        db.collection("visitor").doc("Tyl2gJYGTnmuyJc2175F").update({
-            current: 0
+        let currentdate = Date.now();
+        db.collection("visitor").doc("current").update({
+            current_number: 0,
+            update_at: format(new Date(currentdate), "dd/MM/yyyy HH:mm:ss")
           });
           alert('Le compteur a bien été réinitialisé.')
     }
 
+    //reset password
     function changePasswordCompteur(data){
         let currentdate = Date.now();
-
         db.collection("password").doc("GsJ7CqWKLXATv6S1dINp").update({
             password: data,
             update_at : format(new Date(currentdate), "dd/MM/yyyy HH:mm:ss")
           });
           alert('Le code Compteur a bien été changé par : ' + data)
-
     }
 
+    //PDF export : statistic report
     function loadPdf(){
-
-
         ReactPDF.render(<PdfExport />, `${__dirname}/example.pdf`);
     }
 
@@ -57,8 +57,8 @@ function Dashboard({Nav, current, db, totalVisitor}){
                 <h2 className="dashboard-title">{Nav}</h2>
                 <div className="separator"></div>
                 <div className="card-section">
-                    <LittleCard title='Visiteurs Actuels' content={current} date={"Non renseigné"}/>
-                    <LittleCard title='Visiteurs Totaux' content={totalVisitor} date={"Non renseigné"}/>
+                    <LittleCard title='Visiteurs Actuels' content={currentdata.current_number} date={currentdata.update_at}/>
+                    <LittleCard title='Visiteurs Totaux' content={totalVisitor.totalNumber} date={totalVisitor.update_at}/>
                     <LittleCard title='Code compteur' content={currentPassword} date={passwordUpdate}/>
                 </div>
                 <div className="card-section">

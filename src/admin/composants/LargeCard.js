@@ -22,7 +22,7 @@ function LargeCard({title, db}){
     return(
         <div className="large-card">
             <h2>{title}</h2>
-            <Canvas valuesHistorique={docs.map(e => e.number)} dateHistorique={docs.map(e => format(new Date(e.date), 'dd/MM/yyyy'))}/>
+            <Canvas valuesHistorique={docs.map(e => e.number)} dateHistorique={docs.map(e => format(new Date(e.date), 'dd/MM'))}/>
         </div>
     )
 
