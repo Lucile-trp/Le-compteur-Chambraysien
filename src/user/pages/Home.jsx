@@ -5,7 +5,7 @@ import 'firebase/firestore';
 import "../styles/Home.css";
 
 import {useState, useEffect} from 'react';
-import { db } from '../../firebase';
+import { auth, db } from '../../firebase';
 
 import { Link, useHistory } from "react-router-dom";
 

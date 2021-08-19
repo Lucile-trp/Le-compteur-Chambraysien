@@ -1,16 +1,34 @@
 import '../styles/Admin.css'
 
 import { useState, useEffect } from 'react'
-import {
-    BrowserRouter as Router,
-    Link
-  } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 
 import MenuIcon from '../composants/MenuIcon.js';
+
+import firebase from 'firebase/app';
+import 'firebase/auth'
+import 'firebase/firestore';
+
+
 
 function SmallNav({setNav}){
 
     const [IsOpen, SetIsOpen] = useState(false);
+    const history = useHistory();
+
+    //FUCNTIONS
+    ///disconnect
+
+    function logOut() {
+        
+        firebase.auth().signOut().then(() => {
+            console.log("Vous avez bien été déconnecté")
+            history.push("/");
+          }).catch((error) => {
+            console.log(error)
+          });
+    }
+    
 
     return IsOpen ? (
 
@@ -24,7 +42,11 @@ function SmallNav({setNav}){
         </section>
         <section className="nav-section">
             <h3 className="nav-title">Hébergement et Base de données</h3>
-            <a href="https://console.firebase.google.com/u/1/project/le-compteur-chambraysien/overview" className="nav-link" target="_blank">Firebase</a>
+            <a href="https://console.firebase.google.com/u/1/project/le-compteur-chambraysien/overview" className="nav-link" rel="noreferrer" target="_blank">Firebase</a>
+        </section>
+        <section className="nav-section">
+            <h3 className="nav-title">_</h3>
+            <button className="nav-link button-disconnect" onClick={ () => logOut()}>Se déconnecter</button>
         </section>
     </div>
     ) : (
