@@ -42,6 +42,26 @@ p{
     border-radius: 10px;
 }
 
+.connected-informations {
+    margin: 0px 10px;
+}
+
+.home-button-connect {
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    max-width: none;
+
+
+}
+.home-button-disconnect{
+    background-color: rgb(216, 36, 36);
+    color: white;
+    padding: 10px 20px;
+    margin: 10px;
+    max-width: none;
+}
+
 @media screen and (max-width: 1000px){
 
     .main-content{

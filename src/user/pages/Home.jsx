@@ -1,13 +1,10 @@
-import firebase from 'firebase/app';
-import 'firebase/auth'
-import 'firebase/firestore';
-
 import "../styles/Home.css";
 
 import {useState, useEffect} from 'react';
-import { auth, db } from '../../firebase';
+import { db } from '../../firebase';
 
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 
 
@@ -28,23 +25,8 @@ function Home({user, setUser}){
         });
     }
 
-    // AUTH WITH GOOGLE
-    const provider = new firebase.auth.GoogleAuthProvider();
-    let history = useHistory();
-
-    function googleSignin() {
-        
-        firebase.auth()
-        .signInWithPopup(provider).then(function(result) {
-            var credential = result.credential;
-            var token = credential.accessToken;
-            var user = result.user;
-
-           console.log(token, user)
-           history.push("/admin");
-        })
-     }
-
+    const {signinWithGoogle, admin} = useAuth()
+    const {signout} = useAuth()
      
     return( 
         <div className="main-content">
@@ -55,11 +37,17 @@ function Home({user, setUser}){
                 <Link className="link-compteur home-link"to='/Compteur'>Accès compteur</Link>
             </div>
             <div className="separator"></div>
-
-            <div className="home-section-admin">
-                <Link className="link-admin home-link" to='/Admin'>Accès admin</Link>
-            </div>
-            <button onClick ={() => googleSignin()}>Connexion Administrateur/Dev</button>
+            {admin ? <p></p>: <div><button className="home-button-connect" onClick={signinWithGoogle}>Connexion Administrateur</button>Si vous n'avez pas les droit vous serez redirigé.<p></p></div>}
+            {admin ? 
+                <div>
+                    <div className="home-section-admin">
+                        <Link className="link-admin home-link" to='/Admin'>Accès admin</Link>
+                    </div>
+                    <p className="connected-informations">Vous êtes connecté avec le compte <strong>{admin.email}</strong></p>
+                    <button className="home-button-disconnect" onClick={signout}>Se déconnecter</button>
+                </div>
+                : <p></p>
+            }
             <div className="separator"></div>
         </div> 
 

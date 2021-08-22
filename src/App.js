@@ -1,8 +1,9 @@
 import './App.css';
 import './user/styles/style.css';
 
+import { AuthProvider } from './hooks/useAuth';
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+
 import {
     BrowserRouter as Router,
     Route,
@@ -16,10 +17,9 @@ import Home from './user/pages/Home.jsx';
 import Compteur from './user/pages/Compteur.jsx';
 import AdminPage from './admin/pages/Admin';
 import NotFound from './user/composants/NotFound';
-
+import NoPermissions from './user/composants/NoPermissions';
 
 import { db } from './firebase';
-
 
 
 
@@ -36,13 +36,12 @@ function App() {
       setTotalVisitor(doc.data());
     });
   },[])
-
-  
   
 
   const [user, setUser] = useState(false);
     
   return (
+    <AuthProvider>
           <Router>
             <Header />
             <Switch>
@@ -59,6 +58,10 @@ function App() {
                 <AdminPage currentdata={currentvisitor} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
               </Route>
 
+              <Route exact path="/401">
+                <NoPermissions />
+              </Route>
+
               <Route path="*">
                 <NotFound />
               </Route>
@@ -66,6 +69,7 @@ function App() {
             </Switch>
             <Footer /> 
           </Router>
+    </AuthProvider>
   )
 
 }

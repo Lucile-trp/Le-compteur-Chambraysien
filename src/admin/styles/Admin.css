@@ -5,7 +5,7 @@
 
 .nav{
     
-    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
     grid-column: 1/2;
     background-color:rgb(0, 164, 185);
 

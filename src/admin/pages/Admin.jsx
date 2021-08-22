@@ -1,14 +1,13 @@
 import '../styles/Admin.css'
 
-import firebase from 'firebase/app';
-import 'firebase/auth'
-import 'firebase/firestore';
-
 import { useState, useEffect } from 'react'
 import { Link, useHistory } from "react-router-dom";
 
+import { firebase} from '../../firebase';
+
 import Dashboard from '../composants/Dashboard.js';
 import SmallNav from '../composants/SmallNav.js';
+import { useAuth } from '../../hooks/useAuth';
 
 
 
@@ -17,29 +16,28 @@ function AdminPage({currentdata, db, setCurrent, totalVisitor}){
     //VARIABLES
     const [Nav, setNav] = useState('Statistiques');
     let history = useHistory();
+    const {admin} = useAuth();
 
     // PAGE TITLE
     useEffect( () =>{document.title= 'LCC Admin - ' + Nav ; },[Nav])
-
-
+    useEffect(()=> {
+        if(!admin || admin.uid !== "0IDHzspGaEhF255SaMsA5uNCjiC2"){
+            history.push('/401')
+        }
+    },[])
 
     //FUCNTIONS
     ///disconnect TODO
 
     function logOut() {
-        
         firebase.auth().signOut().then(() => {
-            console.log("Vous avez bien été déconnecté")
             history.push("/");
           }).catch((error) => {
             console.log(error)
           });
     }
-    
-
 
     return(
-
         <div className="main-section">
             <div className="nav">
                 <section className="nav-section">
@@ -61,7 +59,6 @@ function AdminPage({currentdata, db, setCurrent, totalVisitor}){
             <div className="small-screen-nav"> 
                 <SmallNav  setNav={setNav}/>
             </div>
-
             <section className="main-dashboard-section">
                 <Dashboard Nav={Nav} currentdata={currentdata} db={db} setCurrent={setCurrent} totalVisitor={totalVisitor}/>
             </section>
