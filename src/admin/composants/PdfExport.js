@@ -1,31 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
+import {  useState } from 'react';
+import { format } from 'date-fns';
 
-// Create styles
+import Canvas from './Canvas'
+
+// PDF styles
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'row',
-    backgroundColor: '#E4E4E4'
-  },
-  section: {
+    flexDirection: 'column',
     margin: 10,
     padding: 10,
-    flexGrow: 1
+  },
+  textBody: {
+    fontSize: "12px",
+  },
+  textFooter: {
+    fontSize: "9px",
+    color: "#CECECE",
   }
 });
 
 // Create Document Component
-const PdfExport = () => (
-  <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text>Section #1</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Section #2</Text>
-      </View>
-    </Page>
-  </Document>
-);
+function ExportPDF({eventName, totalVisitor }) {
 
-export default PdfExport;
+  return (
+    <Document>
+      {/* HEADER */}
+      <Page size="A4" orientation="portrait" style={styles.page}>
+        <View style={styles.section}>
+          <Text>Rapport de visites - Le compteur Chambraysien</Text>
+        </View>
+
+        {/* BODY */}
+        <View>
+          <Text>Evenement: {eventName}</Text>
+          <Text>Visiteurs totaux sur la période : {totalVisitor.totalNumber} </Text>
+          <Text>Visiteurs le 18 Septembre : </Text>
+          <Text>Visiteurs le 19 Septembre :  </Text>
+        </View>
+
+        {/* FOOTER */}
+        <View style={styles.section}>
+          <Text style={styles.textFooter}>Exporté avec l'application : Le compteur Chambraysien</Text>
+        </View>
+      </Page>
+    </Document>
+
+  )
+}
+
+export default ExportPDF;

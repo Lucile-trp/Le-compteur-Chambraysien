@@ -24,6 +24,7 @@ function AdminPage({currentdata, db, setCurrent, totalVisitor}){
         if(!admin || admin.uid !== "0IDHzspGaEhF255SaMsA5uNCjiC2"){
             history.push('/401')
         }
+        console.log("Admin Auth")
     },[])
 
     //FUCNTIONS

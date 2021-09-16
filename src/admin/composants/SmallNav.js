@@ -18,9 +18,7 @@ function SmallNav({setNav}){
 
     //FUCNTIONS
     ///disconnect
-
     function logOut() {
-        
         firebase.auth().signOut().then(() => {
             console.log("Vous avez bien été déconnecté")
             history.push("/");
@@ -28,8 +26,6 @@ function SmallNav({setNav}){
             console.log(error)
           });
     }
-    
-
     return IsOpen ? (
 
     <div className="nav-container-small" >

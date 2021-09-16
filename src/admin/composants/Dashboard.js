@@ -4,8 +4,8 @@ import LargeCard from './LargeCard';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-import ReactPDF from '@react-pdf/renderer';
-import PdfExport from '../composants/PdfExport';
+import ReactPDF, {PDFDownloadLink} from '@react-pdf/renderer';
+import FormData from '../composants/FormData';
 
 import '../styles/Dashboard.css';
 import {  useState } from 'react';
@@ -17,8 +17,9 @@ function Dashboard({Nav, currentdata, db, totalVisitor}){
     const [passwordUpdate, setPasswordUpdate] = useState();
     const [tempPassword, setTempPassword] = useState();
 
+
     useEffect( () => {
-        db.collection("password").doc("GsJ7CqWKLXATv6S1dINp").onSnapshot((doc) => {
+        db.collection("password").doc("GsJ7CqWKLXATv6S1dINp").get().then((doc) => {
             setPassword(doc.data().password);
             setPasswordUpdate(doc.data().update_at);
         });
@@ -45,10 +46,17 @@ function Dashboard({Nav, currentdata, db, totalVisitor}){
           alert('Le code Compteur a bien été changé par : ' + data)
     }
 
-    //PDF export : statistic report
-    function loadPdf(){
-        ReactPDF.render(<PdfExport />, `${__dirname}/example.pdf`);
-    }
+    // init datas for PDF export 
+    // const [max, setMax] = useState([]);
+    // useEffect( () => {
+    //     let docRef =  db.collection("historique").orderBy('number', 'desc').limit(1);
+
+    //    docRef.get().then((doc) => {
+    //        console.log(doc.data());
+    //         // const docData = doc.data();
+    //         // setMax(docData);
+    //     });
+    // }, [])
 
 
     if (Nav === 'Statistiques'){
@@ -77,7 +85,9 @@ function Dashboard({Nav, currentdata, db, totalVisitor}){
                 <button className="button-action" onClick={() => changePasswordCompteur(tempPassword)}>Changer le code du compteur</button>
                 </div>
                 <button onClick={changeCurrentNumber}>Remettre le compteur à zéro</button>
-                <button onClick={loadPdf}>Exporter les statistiques en PDF</button>
+
+
+                <FormData totalVisitor={totalVisitor}/>
                 <p>La supression des données de visite doit être faite manuellement dans Firebase.</p>
             </div>
         )

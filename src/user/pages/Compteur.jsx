@@ -31,7 +31,8 @@ function Compteur({current, user, totalVisitor}){
 
         db.collection("historique").doc().set({ 
             date : currentdate,
-            number : current.current_number +1
+            number : current.current_number +1,
+            value : "+1"
         });
     }
 
@@ -41,7 +42,8 @@ function Compteur({current, user, totalVisitor}){
         })
         db.collection("historique").doc().set({ 
             date : currentdate,
-            number : current.current_number - 1
+            number : current.current_number - 1,
+            value: "-1"
         });
     }
 
