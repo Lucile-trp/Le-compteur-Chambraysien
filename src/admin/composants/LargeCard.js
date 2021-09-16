@@ -1,16 +1,11 @@
 import '../styles/LargeCard.css'
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import format from 'date-fns/format'
 import Canvas from './Canvas'
 
-
-
-
 function LargeCard({title, db}){
     const [docs, setDocs] = useState([]);
-
-
 
     function chargingdata(){
         db.collection("historique").orderBy('date').get().then((querySnapshot) => {
@@ -20,7 +15,7 @@ function LargeCard({title, db}){
                 tmp.push(docData)
             });
             setDocs(tmp);
-            console.log("recupération des données historique")
+            // console.log("recupération des données historique")
         });
     }
 

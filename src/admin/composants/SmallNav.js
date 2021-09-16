@@ -1,6 +1,6 @@
 import '../styles/Admin.css'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link, useHistory} from "react-router-dom";
 
 import MenuIcon from '../composants/MenuIcon.js';

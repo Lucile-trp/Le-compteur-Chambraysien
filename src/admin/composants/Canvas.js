@@ -4,17 +4,17 @@ import { Line } from "react-chartjs-2";
 
 function Canvas({valuesHistorique, dateHistorique}){
 
-  const labels = dateHistorique;
   const data = {
-  labels: labels,
-  datasets: [{
-      label: "Visites",
-      borderColor: "#da4c80",
-      data: valuesHistorique,
-      fill: false,
-      tension: 0.1
-  }]
+    labels: dateHistorique,
+    datasets: [{
+        label: "Visites",
+        borderColor: "#da4c80",
+        data: valuesHistorique,
+        fill: false,
+        tension: 0.3
+    }]
   };
+
   const config = {
       type: 'line',
       data: data,

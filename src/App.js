@@ -31,14 +31,13 @@ function App() {
   useEffect( () => {
     db.collection("visitor").doc("current").onSnapshot((doc) => {
       setCurrent(doc.data());
-      console.log('new data current')
+      // console.log('new data current')
     });
     db.collection("visitor").doc("total").onSnapshot((doc) => {
       setTotalVisitor(doc.data());
-      console.log('new data total')
+      // console.log('new data total')
     });
   },[])
-  
 
   const [user, setUser] = useState(false);
     

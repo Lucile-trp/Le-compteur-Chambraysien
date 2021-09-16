@@ -2,10 +2,8 @@ import LittleCard from '../composants/LittleCards';
 import LargeCard from './LargeCard';
 
 import React, { useEffect } from 'react';
-import ReactDOM from 'react-dom';
 
-import ReactPDF, {PDFDownloadLink} from '@react-pdf/renderer';
-import FormData from '../composants/FormData';
+import FormPDF from './FormPDF';
 
 import '../styles/Dashboard.css';
 import {  useState } from 'react';
@@ -46,19 +44,6 @@ function Dashboard({Nav, currentdata, db, totalVisitor}){
           alert('Le code Compteur a bien été changé par : ' + data)
     }
 
-    // init datas for PDF export 
-    // const [max, setMax] = useState([]);
-    // useEffect( () => {
-    //     let docRef =  db.collection("historique").orderBy('number', 'desc').limit(1);
-
-    //    docRef.get().then((doc) => {
-    //        console.log(doc.data());
-    //         // const docData = doc.data();
-    //         // setMax(docData);
-    //     });
-    // }, [])
-
-
     if (Nav === 'Statistiques'){
         return (
             <div className="dashboard-section-2">
@@ -84,10 +69,11 @@ function Dashboard({Nav, currentdata, db, totalVisitor}){
                 <input type="number" onChange={(e) => setTempPassword(e.target.value)}></input>
                 <button className="button-action" onClick={() => changePasswordCompteur(tempPassword)}>Changer le code du compteur</button>
                 </div>
+                <div className="separator-secondaire"></div>
                 <button onClick={changeCurrentNumber}>Remettre le compteur à zéro</button>
-
-
-                <FormData totalVisitor={totalVisitor}/>
+                <div className="container-formulaire">
+                    <FormPDF totalVisitor={totalVisitor} db={db} />
+                </div>
                 <p>La supression des données de visite doit être faite manuellement dans Firebase.</p>
             </div>
         )
